@@ -1,2314 +1,743 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ganpat S. Sawale | Embedded Systems & IoT Engineer Portfolio</title>
-  <meta name="description" content="Portfolio of Ganpat S. Sawale - Electronics & Communication Engineering graduate specializing in Embedded Systems, IoT, Firmware Development, and Hardware Interfacing.">
-  <style>
-/* CSS Reset & Variables */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    :root {
-      --bg-primary: #0a0e17;
-      --bg-secondary: #111827;
-      --bg-card: rgba(17, 24, 39, 0.75);
-      --bg-card-hover: rgba(24, 34, 53, 0.9);
-      --border-color: rgba(55, 65, 81, 0.6);
-      --border-accent: rgba(20, 184, 166, 0.4);
-      --text-primary: #f9fafb;
-      --text-secondary: #9ca3af;
-      --text-muted: #6b7280;
-      --accent: #14b8a6;
-      --accent-glow: rgba(20, 184, 166, 0.25);
-      --accent-light: #2dd4bf;
-      --accent-blue: #38bdf8;
-      --accent-amber: #f59e0b;
-      --accent-purple: #a855f7;
-      --code-bg: #030712;
-      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
-      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
-      --shadow-glow: 0 0 25px rgba(20, 184, 166, 0.2);
-      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      --radius: 12px;
-      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    [data-theme="light"] {
-      --bg-primary: #f8fafc;
-      --bg-secondary: #ffffff;
-      --bg-card: rgba(255, 255, 255, 0.85);
-      --bg-card-hover: #ffffff;
-      --border-color: rgba(226, 232, 240, 0.9);
-      --border-accent: rgba(14, 165, 233, 0.5);
-      --text-primary: #0f172a;
-      --text-secondary: #475569;
-      --text-muted: #94a3b8;
-      --accent: #0d9488;
-      --accent-glow: rgba(13, 148, 136, 0.15);
-      --accent-light: #0f766e;
-      --accent-blue: #0284c7;
-      --accent-amber: #d97706;
-      --accent-purple: #7e22ce;
-      --code-bg: #f1f5f9;
-      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
-      --shadow-glow: 0 0 20px rgba(13, 148, 136, 0.15);
-    }
-
-    html {
-      scroll-behavior: smooth;
-      font-size: 16px;
-    }
-
-    body {
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
-      font-family: var(--font-sans);
-      line-height: 1.6;
-      overflow-x: hidden;
-      min-height: 100vh;
-      transition: background-color 0.3s ease, color 0.3s ease;
-      background-image: 
-        radial-gradient(circle at 15% 15%, var(--accent-glow) 0%, transparent 40%),
-        radial-gradient(circle at 85% 65%, rgba(56, 189, 248, 0.08) 0%, transparent 45%);
-      background-attachment: fixed;
-    }
-
-    /* Container & Layout */
-    .container {
-      width: 100%;
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background-color: rgba(10, 14, 23, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border-color);
-      transition: background-color 0.3s ease;
-    }
-
-    [data-theme="light"] header {
-      background-color: rgba(248, 250, 252, 0.85);
-    }
-
-    .nav-wrap {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 72px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      text-decoration: none;
-      color: var(--text-primary);
-      font-weight: 700;
-      font-size: 1.25rem;
-    }
-
-    .brand-logo {
-      width: 38px;
-      height: 38px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-blue));
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #030712;
-      font-family: var(--font-mono);
-      font-weight: 800;
-      font-size: 1rem;
-      box-shadow: 0 0 12px var(--accent-glow);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 1.75rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: var(--text-secondary);
-      font-size: 0.925rem;
-      font-weight: 500;
-      transition: var(--transition);
-      position: relative;
-    }
-
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: var(--accent-light);
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -6px;
-      left: 0;
-      width: 0%;
-      height: 2px;
-      background: var(--accent);
-      transition: width 0.25s ease;
-      border-radius: 2px;
-    }
-
-    .nav-links a:hover::after,
-    .nav-links a.active::after {
-      width: 100%;
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      padding: 0.625rem 1.25rem;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      text-decoration: none;
-      cursor: pointer;
-      transition: var(--transition);
-      border: 1px solid transparent;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), #0d9488);
-      color: #030712;
-      box-shadow: 0 4px 12px var(--accent-glow);
-    }
-
-    .btn-primary:hover {
-      background: linear-gradient(135deg, var(--accent-light), var(--accent));
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px var(--accent-glow);
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--text-primary);
-      border-color: var(--border-color);
-    }
-
-    .btn-outline:hover {
-      border-color: var(--accent);
-      color: var(--accent-light);
-      background-color: rgba(20, 184, 166, 0.08);
-      transform: translateY(-2px);
-    }
-
-    .btn-icon {
-      padding: 0.6rem;
-      border-radius: 8px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      color: var(--text-secondary);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: var(--transition);
-    }
-
-    .btn-icon:hover {
-      color: var(--accent);
-      border-color: var(--border-accent);
-      background-color: var(--bg-card-hover);
-    }
-
-    .mobile-menu-btn {
-      display: none;
-    }
-
-    /* Hero Section */
-    .hero {
-      padding: 5rem 0 4rem;
-      position: relative;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 3rem;
-      align-items: center;
-    }
-
-    .badge-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.35rem 0.85rem;
-      border-radius: 9999px;
-      background: rgba(20, 184, 166, 0.12);
-      border: 1px solid rgba(20, 184, 166, 0.3);
-      color: var(--accent-light);
-      font-size: 0.825rem;
-      font-weight: 600;
-      margin-bottom: 1.25rem;
-      font-family: var(--font-mono);
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      background-color: #10b981;
-      border-radius: 50%;
-      box-shadow: 0 0 8px #10b981;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.9); }
-      100% { opacity: 1; transform: scale(1); }
-    }
-
-    .hero-title {
-      font-size: 3.25rem;
-      font-weight: 800;
-      line-height: 1.15;
-      margin-bottom: 1rem;
-      letter-spacing: -0.02em;
-    }
-
-    .text-gradient {
-      background: linear-gradient(135deg, #f9fafb 30%, var(--accent-light) 70%, var(--accent-blue) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    [data-theme="light"] .text-gradient {
-      background: linear-gradient(135deg, #0f172a 30%, var(--accent) 70%, var(--accent-blue) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero-subtitle {
-      font-size: 1.2rem;
-      color: var(--accent-blue);
-      font-family: var(--font-mono);
-      font-weight: 600;
-      margin-bottom: 1.25rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .hero-desc {
-      font-size: 1.075rem;
-      color: var(--text-secondary);
-      margin-bottom: 2rem;
-      max-width: 580px;
-    }
-
-    .hero-ctas {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-bottom: 2.25rem;
-    }
-
-    .hero-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      padding-top: 1.75rem;
-      border-top: 1px solid var(--border-color);
-    }
-
-    .meta-item {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--text-secondary);
-      font-size: 0.875rem;
-    }
-
-    .meta-item a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .meta-item a:hover {
-      color: var(--accent-light);
-      text-decoration: underline;
-    }
-
-    .hero-terminal-card {
-      background: var(--code-bg);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-lg), var(--shadow-glow);
-      overflow: hidden;
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      position: relative;
-    }
-
-    .terminal-header {
-      background: rgba(31, 41, 55, 0.7);
-      padding: 0.75rem 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    [data-theme="light"] .terminal-header {
-      background: #e2e8f0;
-    }
-
-    .terminal-dots {
-      display: flex;
-      gap: 6px;
-    }
-
-    .terminal-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-    }
-
-    .dot-red { background: #ef4444; }
-    .dot-yellow { background: #f59e0b; }
-    .dot-green { background: #10b981; }
-
-    .terminal-title {
-      color: var(--text-muted);
-      font-size: 0.75rem;
-    }
-
-    .terminal-body {
-      padding: 1.25rem;
-      line-height: 1.7;
-    }
-
-    .code-comment { color: var(--text-muted); }
-    .code-keyword { color: var(--accent-purple); }
-    .code-func { color: var(--accent-blue); }
-    .code-str { color: #34d399; }
-    .code-num { color: #f97316; }
-    .code-var { color: #e5e7eb; }
-    [data-theme="light"] .code-var { color: #1e293b; }
-
-    /* Section Styles */
-    section {
-      padding: 4.5rem 0;
-      position: relative;
-    }
-
-    .section-header {
-      margin-bottom: 3rem;
-      text-align: center;
-    }
-
-    .section-tag {
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 0.5rem;
-      display: block;
-      font-weight: 600;
-    }
-
-    .section-title {
-      font-size: 2.25rem;
-      font-weight: 800;
-      color: var(--text-primary);
-      letter-spacing: -0.01em;
-    }
-
-    .section-sub {
-      color: var(--text-secondary);
-      font-size: 1rem;
-      max-width: 620px;
-      margin: 0.5rem auto 0;
-    }
-
-    /* Card System */
-    .card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius);
-      padding: 1.75rem;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      transition: var(--transition);
-      position: relative;
-    }
-
-    .card:hover {
-      border-color: var(--border-accent);
-      background: var(--bg-card-hover);
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-md);
-    }
-
-    /* About Section */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 2.5rem;
-      align-items: start;
-    }
-
-    .about-text p {
-      color: var(--text-secondary);
-      font-size: 1.05rem;
-      margin-bottom: 1.25rem;
-      line-height: 1.75;
-    }
-
-    .about-pillars {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-      margin-top: 1.5rem;
-    }
-
-    .pillar-card {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid var(--border-color);
-      padding: 1.25rem;
-      border-radius: 10px;
-      transition: var(--transition);
-    }
-
-    .pillar-card:hover {
-      border-color: var(--border-accent);
-      background: rgba(20, 184, 166, 0.04);
-    }
-
-    .pillar-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      background: rgba(20, 184, 166, 0.15);
-      color: var(--accent-light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 0.75rem;
-    }
-
-    .pillar-title {
-      font-size: 0.95rem;
-      font-weight: 700;
-      margin-bottom: 0.25rem;
-      color: var(--text-primary);
-    }
-
-    .pillar-desc {
-      font-size: 0.825rem;
-      color: var(--text-muted);
-    }
-
-    .about-stats {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.25rem;
-    }
-
-    .stat-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      text-align: center;
-      transition: var(--transition);
-    }
-
-    .stat-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
-    }
-
-    .stat-number {
-      font-size: 2.25rem;
-      font-weight: 800;
-      color: var(--accent-light);
-      font-family: var(--font-mono);
-      line-height: 1;
-      margin-bottom: 0.5rem;
-    }
-
-    .stat-label {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      font-weight: 500;
-    }
-
-    /* Experience Timeline */
-    .timeline {
-      position: relative;
-      max-width: 860px;
-      margin: 0 auto;
-    }
-
-    .timeline::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 28px;
-      width: 2px;
-      background: var(--border-color);
-    }
-
-    .timeline-item {
-      position: relative;
-      padding-left: 72px;
-      margin-bottom: 2.5rem;
-    }
-
-    .timeline-item:last-child {
-      margin-bottom: 0;
-    }
-
-    .timeline-badge {
-      position: absolute;
-      left: 12px;
-      top: 0;
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: var(--bg-secondary);
-      border: 2px solid var(--accent);
-      color: var(--accent-light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 12px var(--accent-glow);
-      z-index: 2;
-    }
-
-    .timeline-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius);
-      padding: 1.75rem;
-      transition: var(--transition);
-    }
-
-    .timeline-card:hover {
-      border-color: var(--border-accent);
-      background: var(--bg-card-hover);
-      box-shadow: var(--shadow-md);
-    }
-
-    .timeline-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 0.75rem;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .role-title {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--text-primary);
-    }
-
-    .company-name {
-      color: var(--accent-blue);
-      font-weight: 600;
-      font-size: 0.975rem;
-      margin-top: 0.15rem;
-    }
-
-    .timeline-date {
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      padding: 0.25rem 0.75rem;
-      border-radius: 9999px;
-      background: rgba(55, 65, 81, 0.4);
-      color: var(--text-secondary);
-      border: 1px solid var(--border-color);
-    }
-
-    .timeline-location {
-      font-size: 0.825rem;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
-      margin-bottom: 1rem;
-    }
-
-    .timeline-points {
-      list-style: none;
-      margin-bottom: 1.25rem;
-    }
-
-    .timeline-points li {
-      position: relative;
-      padding-left: 1.5rem;
-      margin-bottom: 0.75rem;
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      line-height: 1.6;
-    }
-
-    .timeline-points li::before {
-      content: '▹';
-      position: absolute;
-      left: 0;
-      color: var(--accent-light);
-      font-weight: bold;
-    }
-
-    .tech-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .tech-pill {
-      font-family: var(--font-mono);
-      font-size: 0.775rem;
-      padding: 0.25rem 0.65rem;
-      border-radius: 6px;
-      background: rgba(20, 184, 166, 0.1);
-      border: 1px solid rgba(20, 184, 166, 0.2);
-      color: var(--accent-light);
-    }
-
-    /* Projects Section */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2rem;
-    }
-
-    .project-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition: var(--transition);
-    }
-
-    .project-card:hover {
-      border-color: var(--border-accent);
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-lg), var(--shadow-glow);
-    }
-
-    .project-banner {
-      height: 160px;
-      background: linear-gradient(135deg, rgba(20, 184, 166, 0.15), rgba(56, 189, 248, 0.15));
-      border-bottom: 1px solid var(--border-color);
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .project-banner::after {
-      content: '';
-      position: absolute;
-      right: -20px;
-      bottom: -20px;
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .project-type-tag {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      padding: 0.25rem 0.6rem;
-      background: rgba(10, 14, 23, 0.7);
-      border: 1px solid var(--border-color);
-      border-radius: 4px;
-      color: var(--accent-light);
-      align-self: flex-start;
-      backdrop-filter: blur(4px);
-    }
-
-    .project-icon-large {
-      color: var(--accent-light);
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-size: 1.5rem;
-      font-weight: 700;
-    }
-
-    .project-body {
-      padding: 1.75rem;
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-    }
-
-    .project-title {
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 0.5rem;
-    }
-
-    .project-desc {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      line-height: 1.6;
-      margin-bottom: 1.25rem;
-      flex-grow: 1;
-    }
-
-    .project-highlights {
-      list-style: none;
-      margin-bottom: 1.5rem;
-      background: rgba(0, 0, 0, 0.2);
-      border-radius: 8px;
-      padding: 1rem;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    [data-theme="light"] .project-highlights {
-      background: rgba(241, 245, 249, 0.7);
-    }
-
-    .project-highlights li {
-      position: relative;
-      padding-left: 1.25rem;
-      margin-bottom: 0.5rem;
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-    }
-
-    .project-highlights li:last-child {
-      margin-bottom: 0;
-    }
-
-    .project-highlights li::before {
-      content: '✔';
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-      font-size: 0.75rem;
-    }
-
-    .project-status {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.825rem;
-      color: var(--accent-amber);
-      font-family: var(--font-mono);
-      margin-bottom: 1.25rem;
-    }
-
-    .project-footer {
-      border-top: 1px solid var(--border-color);
-      padding-top: 1.25rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    /* Skills Grid */
-    .skills-container {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-
-    .skill-category-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius);
-      padding: 1.75rem;
-      transition: var(--transition);
-    }
-
-    .skill-category-card:hover {
-      border-color: var(--border-accent);
-      transform: translateY(-2px);
-    }
-
-    .skill-cat-header {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 1.25rem;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 0.85rem;
-    }
-
-    .skill-cat-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      background: rgba(20, 184, 166, 0.12);
-      color: var(--accent-light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .skill-cat-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--text-primary);
-    }
-
-    .skill-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .skill-tag {
-      font-size: 0.85rem;
-      font-weight: 500;
-      padding: 0.35rem 0.75rem;
-      border-radius: 6px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--border-color);
-      color: var(--text-secondary);
-      transition: var(--transition);
-    }
-
-    [data-theme="light"] .skill-tag {
-      background: rgba(0, 0, 0, 0.04);
-    }
-
-    .skill-tag:hover {
-      background: rgba(20, 184, 166, 0.12);
-      border-color: var(--accent);
-      color: var(--accent-light);
-    }
-
-    .skill-tag.featured {
-      background: rgba(20, 184, 166, 0.1);
-      border-color: rgba(20, 184, 166, 0.3);
-      color: var(--accent-light);
-      font-weight: 600;
-    }
-
-    /* Certifications & Education */
-    .edu-cert-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-    }
-
-    .cert-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius);
-      padding: 2rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .cert-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--accent), var(--accent-blue));
-    }
-
-    .cert-badge-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--accent-light);
-      background: rgba(20, 184, 166, 0.1);
-      padding: 0.25rem 0.65rem;
-      border-radius: 4px;
-      margin-bottom: 1rem;
-    }
-
-    .cert-title {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 0.5rem;
-    }
-
-    .cert-issuer {
-      color: var(--accent-blue);
-      font-weight: 600;
-      font-size: 0.95rem;
-      margin-bottom: 1rem;
-    }
-
-    .modules-list {
-      margin-top: 1.25rem;
-      border-top: 1px solid var(--border-color);
-      padding-top: 1.25rem;
-    }
-
-    .modules-title {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.75rem;
-      font-weight: 600;
-    }
-
-    .modules-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.45rem;
-    }
-
-    .module-pill {
-      font-size: 0.8rem;
-      padding: 0.25rem 0.6rem;
-      border-radius: 4px;
-      background: rgba(56, 189, 248, 0.08);
-      border: 1px solid rgba(56, 189, 248, 0.2);
-      color: var(--text-secondary);
-    }
-
-    .edu-item {
-      margin-bottom: 1.75rem;
-      padding-bottom: 1.75rem;
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    .edu-item:last-child {
-      margin-bottom: 0;
-      padding-bottom: 0;
-      border-bottom: none;
-    }
-
-    .edu-degree {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 0.25rem;
-    }
-
-    .edu-inst {
-      color: var(--accent-light);
-      font-weight: 600;
-      font-size: 0.95rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .edu-meta {
-      display: flex;
-      justify-content: space-between;
-      color: var(--text-muted);
-      font-size: 0.85rem;
-      font-family: var(--font-mono);
-    }
-
-    /* Contact Section */
-    .contact-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius);
-      padding: 3rem;
-      max-width: 960px;
-      margin: 0 auto;
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-    }
-
-    .contact-info-list {
-      list-style: none;
-      margin-top: 1.5rem;
-    }
-
-    .contact-info-item {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1.25rem;
-    }
-
-    .contact-icon-box {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
-      background: rgba(20, 184, 166, 0.12);
-      border: 1px solid rgba(20, 184, 166, 0.2);
-      color: var(--accent-light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .contact-label {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .contact-val {
-      color: var(--text-primary);
-      font-weight: 600;
-      text-decoration: none;
-      font-size: 0.95rem;
-      transition: color 0.2s;
-    }
-
-    .contact-val:hover {
-      color: var(--accent-light);
-    }
-
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-    }
-
-    .form-group label {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-secondary);
-    }
-
-    .form-control {
-      background: rgba(0, 0, 0, 0.25);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 0.75rem 1rem;
-      color: var(--text-primary);
-      font-family: inherit;
-      font-size: 0.9rem;
-      transition: var(--transition);
-    }
-
-    [data-theme="light"] .form-control {
-      background: #f8fafc;
-    }
-
-    .form-control:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px var(--accent-glow);
-    }
-
-    textarea.form-control {
-      min-height: 110px;
-      resize: vertical;
-    }
-
-    /* Toast Notification */
-    .toast {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border-accent);
-      padding: 1rem 1.5rem;
-      border-radius: 8px;
-      box-shadow: var(--shadow-lg);
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      color: var(--text-primary);
-      font-size: 0.9rem;
-      z-index: 100;
-      transform: translateY(120%);
-      opacity: 0;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .toast.show {
-      transform: translateY(0);
-      opacity: 1;
-    }
-
-    .toast-icon {
-      color: var(--accent-light);
-    }
-
-    /* Footer */
-    footer {
-      border-top: 1px solid var(--border-color);
-      padding: 2.5rem 0;
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 0.875rem;
-      background: rgba(10, 14, 23, 0.5);
-    }
-
-    [data-theme="light"] footer {
-      background: #f1f5f9;
-    }
-
-    /* Modal for Project Details */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(6px);
-      z-index: 999;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 1.5rem;
-    }
-
-    .modal-overlay.active {
-      display: flex;
-    }
-
-    .modal-card {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius);
-      max-width: 650px;
-      width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-      padding: 2rem;
-      position: relative;
-      box-shadow: var(--shadow-lg);
-      animation: modalSlide 0.3s ease;
-    }
-
-    @keyframes modalSlide {
-      from { transform: translateY(20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 1.25rem;
-      right: 1.25rem;
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      font-size: 1.5rem;
-      cursor: pointer;
-      line-height: 1;
-      transition: color 0.2s;
-    }
-
-    .modal-close:hover {
-      color: var(--text-primary);
-    }
-
-    /* Responsive Design */
-    @media (max-width: 992px) {
-      .hero-grid {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-      }
-      .about-grid {
-        grid-template-columns: 1fr;
-      }
-      .skills-container {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .projects-grid {
-        grid-template-columns: 1fr;
-      }
-      .edu-cert-grid {
-        grid-template-columns: 1fr;
-      }
-      .contact-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-        position: absolute;
-        top: 72px;
-        left: 0;
-        right: 0;
-        background: var(--bg-secondary);
-        flex-direction: column;
-        padding: 1.5rem;
-        border-bottom: 1px solid var(--border-color);
-        box-shadow: var(--shadow-lg);
-      }
-      .nav-links.mobile-open {
-        display: flex;
-      }
-      .mobile-menu-btn {
-        display: flex;
-      }
-      .hero-title {
-        font-size: 2.5rem;
-      }
-      .skills-container {
-        grid-template-columns: 1fr;
-      }
-      .about-pillars {
-        grid-template-columns: 1fr;
-      }
-      .contact-card {
-        padding: 1.75rem;
-      }
-      .timeline::before {
-        left: 18px;
-      }
-      .timeline-item {
-        padding-left: 52px;
-      }
-      .timeline-badge {
-        left: 2px;
-      }
-    }
-
-    /* Print styles */
-    @media print {
-      header, .hero-terminal-card, .btn-icon, .hero-ctas, .contact-form, footer, .modal-overlay, .toast {
-        display: none !important;
-      }
-      body {
-        background: white !important;
-        color: black !important;
-      }
-      .card, .timeline-card, .project-card, .skill-category-card, .cert-card {
-        border: 1px solid #ccc !important;
-        background: white !important;
-        box-shadow: none !important;
-        page-break-inside: avoid;
-      }
-    }
-</style>
-</head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ganpat Satwarao Sawale (Ganpat S. Sawale) | Embedded Systems &amp; IoT Engineer Portfolio</title>
+<meta content="Official portfolio of Ganpat Satwarao Sawale (Ganpat S. Sawale) - Electronics &amp; Communication Engineering graduate specializing in Embedded Systems, IoT, Firmware Development, STM32, ESP32, and 8051. Pune, Maharashtra." name="description"/>
+<link href="style.css" rel="stylesheet"/>
+<meta content="Ganpat Satwarao Sawale, Ganpat Sawale, Ganpat S Sawale, Ganpat S. Sawale, Embedded Systems Engineer, IoT Engineer, Firmware Developer, Electronics and Communication Engineering, Agnihotri College of Engineering, Cojag Technology, Pune, Maharashtra, STM32, ESP32, 8051, Embedded C" name="keywords"/><meta content="Ganpat Satwarao Sawale" name="author"/><meta content="index, follow" name="robots"/><meta content="Ganpat Satwarao Sawale | Embedded Systems &amp; IoT Engineer Portfolio" property="og:title"/><meta content="Official portfolio of Ganpat Satwarao Sawale (Ganpat S. Sawale) - Embedded Systems, IoT, and Firmware Engineer." property="og:description"/><meta content="profile" property="og:type"/><meta content="Ganpat Satwarao" property="profile:first_name"/><meta content="Sawale" property="profile:last_name"/><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Ganpat Satwarao Sawale",
+  "alternateName": ["Ganpat Sawale", "Ganpat S. Sawale", "Ganpat S Sawale"],
+  "jobTitle": "Embedded Systems & IoT Engineer",
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": "Agnihotri College of Engineering, Wardha (RTMNU)"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Pune",
+    "addressRegion": "Maharashtra",
+    "addressCountry": "India"
+  },
+  "email": "mailto:ganpatsawale13@gmail.com",
+  "telephone": "+91-9322707012",
+  "sameAs": [
+    "https://www.linkedin.com/in/ganpat-sawale13"
+  ],
+  "knowsAbout": [
+    "Embedded Systems",
+    "IoT",
+    "Embedded C",
+    "Arduino",
+    "ESP32",
+    "STM32",
+    "8051 Microcontrollers",
+    "Hardware Interfacing",
+    "Circuit Design"
+  ]
+}</script></head>
 <body>
-
-  <!-- Top Header Navigation -->
-  <header>
-    <div class="container nav-wrap">
-      <a href="#home" class="brand">
-        <div class="brand-logo">GS</div>
-        <span>Ganpat Sawale</span>
-      </a>
-
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#about">About</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#education">Education & Certs</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="btn-icon" title="Toggle Theme" aria-label="Toggle Theme">
-          <svg id="moonIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
-          <svg id="sunIcon" style="display:none;" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="5"></circle>
-            <line x1="12" y1="1" x2="12" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="23"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="1" y1="12" x2="3" y2="12"></line>
-            <line x1="21" y1="12" x2="23" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-          </svg>
-        </button>
-
-        <a href="#contact" class="btn btn-primary">Hire Me</a>
-
-        <button class="btn-icon mobile-menu-btn" id="mobileMenuBtn" aria-label="Open Navigation Menu">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          </svg>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <!-- Hero Section -->
-  <section class="hero" id="home">
-    <div class="container hero-grid">
-      <div class="hero-content">
-        <div class="badge-status">
-          <span class="status-dot"></span>
-          <span>AVAILABLE FOR EMBEDDED SYSTEMS ROLES</span>
-        </div>
-
-        <h1 class="hero-title">
-          Hi, I'm <span class="text-gradient">Ganpat S. Sawale</span>
-        </h1>
-
-        <div class="hero-subtitle">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
-            <rect x="9" y="9" width="6" height="6"></rect>
-            <line x1="9" y1="1" x2="9" y2="4"></line>
-            <line x1="15" y1="1" x2="15" y2="4"></line>
-            <line x1="9" y1="20" x2="9" y2="23"></line>
-            <line x1="15" y1="20" x2="15" y2="23"></line>
-            <line x1="20" y1="9" x2="23" y2="9"></line>
-            <line x1="20" y1="14" x2="23" y2="14"></line>
-            <line x1="1" y1="9" x2="4" y2="9"></line>
-            <line x1="1" y1="14" x2="4" y2="14"></line>
-          </svg>
-          <span>Embedded Systems & IoT Engineer</span>
-        </div>
-
-        <p class="hero-desc">
-          Electronics & Communication Engineering graduate skilled in microcontroller firmware, hardware interfacing, circuit design, and Embedded C. Experienced in real-world IoT automation at Cojag Technology.
+<!-- Top Header Navigation -->
+<header>
+<div class="container nav-wrap">
+<a class="brand" href="#home">
+<div class="brand-logo">GS</div>
+<span>Ganpat Sawale</span>
+</a>
+<ul class="nav-links" id="navLinks"><li><a href="#about">About</a></li><li><a href="#experience">Experience</a></li><li><a href="#major-projects">Major Projects</a></li><li><a href="#minor-projects">Minor Projects</a></li><li><a href="#skills">Skills</a></li><li><a href="#education">Education &amp; Certs</a></li><li><a href="#contact">Contact</a></li></ul>
+<div class="nav-actions">
+<button aria-label="Toggle Theme" class="btn-icon" id="themeToggle" title="Toggle Theme">
+<svg fill="none" height="18" id="moonIcon" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+</svg>
+<svg fill="none" height="18" id="sunIcon" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="display:none;" viewbox="0 0 24 24" width="18">
+<circle cx="12" cy="12" r="5"></circle>
+<line x1="12" x2="12" y1="1" y2="3"></line>
+<line x1="12" x2="12" y1="21" y2="23"></line>
+<line x1="4.22" x2="5.64" y1="4.22" y2="5.64"></line>
+<line x1="18.36" x2="19.78" y1="18.36" y2="19.78"></line>
+<line x1="1" x2="3" y1="12" y2="12"></line>
+<line x1="21" x2="23" y1="12" y2="12"></line>
+<line x1="4.22" x2="5.64" y1="19.78" y2="18.36"></line>
+<line x1="18.36" x2="19.78" y1="5.64" y2="4.22"></line>
+</svg>
+</button>
+<a class="btn btn-primary" href="#contact">Hire Me</a>
+<button aria-label="Open Navigation Menu" class="btn-icon mobile-menu-btn" id="mobileMenuBtn">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20">
+<line x1="3" x2="21" y1="12" y2="12"></line>
+<line x1="3" x2="21" y1="6" y2="6"></line>
+<line x1="3" x2="21" y1="18" y2="18"></line>
+</svg>
+</button>
+</div>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="hero" id="home">
+<div class="container hero-grid">
+<div class="hero-content">
+<div class="badge-status">
+<span class="status-dot"></span>
+<span>AVAILABLE FOR EMBEDDED SYSTEMS ROLES</span>
+</div>
+<h1 class="hero-title">Hi, I'm <span class="text-gradient">Ganpat Satwarao Sawale</span></h1>
+<div class="hero-subtitle">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20">
+<rect height="16" rx="2" ry="2" width="16" x="4" y="4"></rect>
+<rect height="6" width="6" x="9" y="9"></rect>
+<line x1="9" x2="9" y1="1" y2="4"></line>
+<line x1="15" x2="15" y1="1" y2="4"></line>
+<line x1="9" x2="9" y1="20" y2="23"></line>
+<line x1="15" x2="15" y1="20" y2="23"></line>
+<line x1="20" x2="23" y1="9" y2="9"></line>
+<line x1="20" x2="23" y1="14" y2="14"></line>
+<line x1="1" x2="4" y1="9" y2="9"></line>
+<line x1="1" x2="4" y1="14" y2="14"></line>
+</svg>
+<span>Embedded Systems &amp; IoT Engineer</span>
+</div>
+<p class="hero-desc">
+          Electronics &amp; Communication Engineering graduate with hands-on internship experience in embedded systems and IoT development at Cojag Technology Pvt. Ltd. Skilled in hardware interfacing, circuit design, and microcontroller programming using Arduino, ESP32, and Embedded C. Seeking a fresher Embedded Systems Engineer role to build reliable, efficient embedded solutions.
         </p>
-
-        <div class="hero-ctas">
-          <a href="#projects" class="btn btn-primary">
-            <span>Explore Projects</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-          </a>
-          <a href="mailto:ganpatsawale13@gmail.com" class="btn btn-outline">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-              <polyline points="22,6 12,13 2,6"></polyline>
-            </svg>
-            <span>Email Me</span>
-          </a>
-          <button onclick="window.print()" class="btn btn-outline" title="Print or save as PDF">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="6 9 6 2 18 2 18 9"></polyline>
-              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
-              <rect x="6" y="14" width="12" height="8"></rect>
-            </svg>
-            <span>Print Resume</span>
-          </button>
-        </div>
-
-        <div class="hero-meta">
-          <div class="meta-item">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-              <circle cx="12" cy="10" r="3"></circle>
-            </svg>
-            <span>Pune, Maharashtra</span>
-          </div>
-          <div class="meta-item">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-            </svg>
-            <a href="tel:9322707012">+91 9322707012</a>
-          </div>
-          <div class="meta-item">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
-              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-              <rect x="2" y="9" width="4" height="12"></rect>
-              <circle cx="4" cy="4" r="2"></circle>
-            </svg>
-            <a href="https://linkedin.com/in/ganpat-sawale13" target="_blank" rel="noopener">linkedin.com/in/ganpat-sawale13</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Terminal Showcase Card -->
-      <div class="hero-terminal-card">
-        <div class="terminal-header">
-          <div class="terminal-dots">
-            <span class="terminal-dot dot-red"></span>
-            <span class="terminal-dot dot-yellow"></span>
-            <span class="terminal-dot dot-green"></span>
-          </div>
-          <span class="terminal-title">firmware_init.c — GanpatOS</span>
-          <span style="font-size: 0.75rem; color: var(--accent);">UART 115200</span>
-        </div>
-        <div class="terminal-body">
-          <p><span class="code-comment">/* System Initializer & Device Tree */</span></p>
-          <p><span class="code-keyword">#include</span> <span class="code-str">&lt;embedded_c.h&gt;</span></p>
-          <p><span class="code-keyword">#include</span> <span class="code-str">&lt;protocols/i2c_spi_uart.h&gt;</span></p>
-          <br>
-          <p><span class="code-keyword">typedef struct</span> {</p>
-          <p>&nbsp;&nbsp;<span class="code-keyword">char</span>* engineer;</p>
-          <p>&nbsp;&nbsp;<span class="code-keyword">char</span>* status;</p>
-          <p>&nbsp;&nbsp;<span class="code-keyword">char</span>* core_mcu[<span class="code-num">6</span>];</p>
-          <p>} <span class="code-var">EngineerProfile_t</span>;</p>
-          <br>
-          <p><span class="code-keyword">int</span> <span class="code-func">main</span>(<span class="code-keyword">void</span>) {</p>
-          <p>&nbsp;&nbsp;<span class="code-var">EngineerProfile_t</span> dev = {</p>
-          <p>&nbsp;&nbsp;&nbsp;&nbsp;.<span class="code-var">engineer</span> = <span class="code-str">"Ganpat S. Sawale"</span>,</p>
-          <p>&nbsp;&nbsp;&nbsp;&nbsp;.<span class="code-var">status</span> = <span class="code-str">"Ready for Deployment"</span>,</p>
-          <p>&nbsp;&nbsp;&nbsp;&nbsp;.<span class="code-var">core_mcu</span> = {<span class="code-str">"ESP32"</span>, <span class="code-str">"ATmega32"</span>, <span class="code-str">"PIC"</span>, <span class="code-str">"8051"</span>}</p>
-          <p>&nbsp;&nbsp;};</p>
-          <br>
-          <p>&nbsp;&nbsp;<span class="code-func">hardware_init</span>();</p>
-          <p>&nbsp;&nbsp;<span class="code-func">kprintf</span>(<span class="code-str">"Target: %s | State: READY\n"</span>, dev.engineer);</p>
-          <p>&nbsp;&nbsp;<span class="code-keyword">return</span> <span class="code-num">0</span>; <span class="code-comment">// 0 Errors, 0 Warnings</span></p>
-          <p>}</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- About Me Section -->
-  <section id="about">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">// Profile Overview</span>
-        <h2 class="section-title">About Me</h2>
-        <p class="section-sub">Passionate about turning bare-metal silicon into smart, interconnected devices.</p>
-      </div>
-
-      <div class="about-grid">
-        <div class="about-text">
-          <p>
-            I am an <strong>Electronics & Communication Engineering graduate</strong> (Class of 2026, Agnihotri College of Engineering, Wardha) with practical internship experience in embedded systems and IoT engineering.
+<div class="hero-ctas">
+<a class="btn btn-primary" href="#major-projects">
+<span>Explore Projects</span>
+<svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16">
+<line x1="5" x2="19" y1="12" y2="12"></line>
+<polyline points="12 5 19 12 12 19"></polyline>
+</svg>
+</a>
+<a class="btn btn-outline" href="mailto:ganpatsawale13@gmail.com">
+<svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16">
+<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+<polyline points="22,6 12,13 2,6"></polyline>
+</svg>
+<span>Email Me</span>
+</a>
+<a class="btn btn-outline" download="Ganpat_Sawale_Resume.pdf" href="Ganpat_Sawale_Resume.pdf" target="_blank" title="Download Resume PDF">
+<svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+<polyline points="7 10 12 15 17 10"></polyline>
+<line x1="12" x2="12" y1="15" y2="3"></line>
+</svg>
+<span>Download Resume</span>
+</a>
+</div>
+<div class="hero-meta">
+<div class="meta-item">
+<svg fill="none" height="16" stroke="var(--accent)" stroke-width="2" viewbox="0 0 24 24" width="16">
+<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+<circle cx="12" cy="10" r="3"></circle>
+</svg>
+<span>Pune, Maharashtra</span>
+</div>
+<div class="meta-item">
+<svg fill="none" height="16" stroke="var(--accent)" stroke-width="2" viewbox="0 0 24 24" width="16">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+</svg>
+<a href="tel:9322707012">+91 9322707012</a>
+</div>
+<div class="meta-item">
+<svg fill="none" height="16" stroke="var(--accent)" stroke-width="2" viewbox="0 0 24 24" width="16">
+<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+<rect height="12" width="4" x="2" y="9"></rect>
+<circle cx="4" cy="4" r="2"></circle>
+</svg>
+<a href="https://www.linkedin.com/in/ganpat-sawale13" rel="noopener" target="_blank">linkedin.com/in/ganpat-sawale13</a>
+</div>
+</div>
+</div>
+<!-- Microcontroller Showcase (Accurate to Resume & Course) -->
+<div class="hero-mcu-showcase">
+<div class="mcu-showcase-header">
+<div class="mcu-header-title">
+<svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18">
+<rect height="16" rx="2" width="16" x="4" y="4"></rect>
+<rect height="6" width="6" x="9" y="9"></rect>
+<path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"></path>
+</svg>
+<span>Microcontrollers &amp; Platforms</span>
+</div>
+<span class="mcu-header-badge">Core Hardware</span>
+</div>
+<div class="mcu-cards-stack">
+<!-- STM32 / ARM Card -->
+<div class="mcu-card stm32-card">
+<div class="mcu-chip-visual">
+<div class="chip-notch"></div>
+<div class="chip-pins chip-pins-left">
+<span></span><span></span><span></span><span></span>
+</div>
+<div class="chip-die">
+<span class="chip-label">STM32</span>
+<span class="chip-sub">ARM 32-Bit</span>
+</div>
+<div class="chip-pins chip-pins-right">
+<span></span><span></span><span></span><span></span>
+</div>
+</div>
+<div class="mcu-details">
+<div class="mcu-name-row">
+<span class="mcu-name">STM32 (ARM)</span>
+<span class="mcu-badge badge-stm">32-Bit</span>
+</div>
+<p class="mcu-desc">Embedded C firmware development, hardware timer configuration, and serial protocol communication.</p>
+<div class="mcu-tags">
+<span class="mcu-tag">ARM Architecture</span>
+<span class="mcu-tag">Timers</span>
+<span class="mcu-tag">UART / SPI / I2C</span>
+<span class="mcu-tag">Embedded C</span>
+</div>
+</div>
+</div>
+<!-- ESP32 Card -->
+<div class="mcu-card esp32-card">
+<div class="mcu-chip-visual">
+<div class="chip-notch"></div>
+<div class="chip-pins chip-pins-left">
+<span></span><span></span><span></span><span></span>
+</div>
+<div class="chip-die die-esp">
+<span class="chip-label">ESP32</span>
+<span class="chip-sub">IoT &amp; Wi-Fi</span>
+</div>
+<div class="chip-pins chip-pins-right">
+<span></span><span></span><span></span><span></span>
+</div>
+</div>
+<div class="mcu-details">
+<div class="mcu-name-row">
+<span class="mcu-name">ESP32 &amp; NodeMCU</span>
+<span class="mcu-badge badge-esp">IoT Platform</span>
+</div>
+<p class="mcu-desc">Wi-Fi enabled IoT sensor interfacing, web dashboard control, and cloud telemetry integration.</p>
+<div class="mcu-tags">
+<span class="mcu-tag">Wi-Fi Modes</span>
+<span class="mcu-tag">HTTP Protocols</span>
+<span class="mcu-tag">Sensor Nodes</span>
+<span class="mcu-tag">NodeMCU</span>
+</div>
+</div>
+</div>
+<!-- 8051 Card -->
+<div class="mcu-card mcu8051-card">
+<div class="mcu-chip-visual">
+<div class="chip-notch"></div>
+<div class="chip-pins chip-pins-left">
+<span></span><span></span><span></span><span></span>
+</div>
+<div class="chip-die die-8051">
+<span class="chip-label">8051</span>
+<span class="chip-sub">AT89C51</span>
+</div>
+<div class="chip-pins chip-pins-right">
+<span></span><span></span><span></span><span></span>
+</div>
+</div>
+<div class="mcu-details">
+<div class="mcu-name-row">
+<span class="mcu-name">8051 Microcontroller</span>
+<span class="mcu-badge badge-8051">AT89C51</span>
+</div>
+<p class="mcu-desc">GPIO programming, 7-segment and LCD display interfacing, timers/counters, and interrupts programming.</p>
+<div class="mcu-tags">
+<span class="mcu-tag">GPIO</span>
+<span class="mcu-tag">7-Segment</span>
+<span class="mcu-tag">LCD Display</span>
+<span class="mcu-tag">Keil µVision</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- About Me Section -->
+<section id="about">
+<div class="container">
+<div class="section-header">
+<h2 class="section-title">About Me</h2>
+<p class="section-sub">Electronics &amp; Communication Engineering graduate with hands-on exposure in embedded systems, microcontroller programming, and IoT automation.</p>
+</div>
+<div class="about-grid">
+<div class="about-text">
+<p>
+            Electronics &amp; Communication Engineering graduate with hands-on internship experience in embedded systems and IoT development at <strong>Cojag Technology Pvt. Ltd.</strong> Skilled in hardware interfacing, circuit design, and microcontroller programming using <strong>Arduino, ESP32, and Embedded C</strong>.
           </p>
-          <p>
-            During my internship at <strong>Cojag Technology Pvt. Ltd.</strong> in Nagpur, I worked directly with sensor interfacing, hardware wiring diagnosis, and Embedded C programming on microcontrollers. I enjoy solving low-level challenges—from timing constraints on communication buses (UART, I2C, SPI) to board-level troubleshooting with multimeters and debug tools.
+<p>
+            Seeking a fresher <strong>Embedded Systems Engineer</strong> role where I can apply practical industry exposure and strong foundations across microcontroller platforms (Arduino UNO, ESP32, NodeMCU, ATmega32, PIC, and 8051) to build reliable, efficient embedded solutions.
           </p>
-          <p>
-            My goal is to secure a <strong>fresher Embedded Systems Engineer role</strong> where I can apply my foundation in microcontroller architectures, EDA schematic design (KiCad, Proteus), and embedded C/C++ firmware to build dependable products.
-          </p>
-
-          <div class="about-pillars">
-            <div class="pillar-card">
-              <div class="pillar-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M18 20V10M12 20V4M6 20v-6"></path>
-                </svg>
-              </div>
-              <div class="pillar-title">Hardware Interfacing</div>
-              <div class="pillar-desc">Sensor testing, relay modules, level detection, and circuit debug.</div>
-            </div>
-
-            <div class="pillar-card">
-              <div class="pillar-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="16 18 22 12 16 6"></polyline>
-                  <polyline points="8 6 2 12 8 18"></polyline>
-                </svg>
-              </div>
-              <div class="pillar-title">Firmware in C</div>
-              <div class="pillar-desc">Clean Embedded C architecture, register access, and modular code.</div>
-            </div>
-
-            <div class="pillar-card">
-              <div class="pillar-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <line x1="2" y1="12" x2="22" y2="12"></line>
-                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                </svg>
-              </div>
-              <div class="pillar-title">IoT Protocols</div>
-              <div class="pillar-desc">Reliable telemetry and communication using UART, SPI, and I2C.</div>
-            </div>
-
-            <div class="pillar-card">
-              <div class="pillar-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
-                </svg>
-              </div>
-              <div class="pillar-title">EDA & Tooling</div>
-              <div class="pillar-desc">KiCad, EasyEDA, Proteus simulation, Keil µVision, MPLAB X.</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="about-stats">
-          <div class="stat-card">
-            <div class="stat-number">6+</div>
-            <div class="stat-label">Microcontrollers Mastered (AVR, PIC, ESP32, 8051, etc.)</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number">6 Mos</div>
-            <div class="stat-label">Hands-on Industry Internship (Cojag Technology)</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number">8/9</div>
-            <div class="stat-label">Advanced Embedded Modules Certified (SOFCON / NSDC)</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number">3</div>
-            <div class="stat-label">Serial Bus Protocols (UART, SPI, I2C)</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Internship & Work Experience -->
-  <section id="experience" style="background: rgba(17, 24, 39, 0.3);">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">// Industry Experience</span>
-        <h2 class="section-title">Work Experience</h2>
-        <p class="section-sub">Applying theoretical principles to production-grade embedded prototypes.</p>
-      </div>
-
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-badge">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-            </svg>
-          </div>
-
-          <div class="timeline-card">
-            <div class="timeline-header">
-              <div>
-                <h3 class="role-title">Intern – IoT & Embedded Systems</h3>
-                <div class="company-name">Cojag Technology Pvt. Ltd.</div>
-              </div>
-              <span class="timeline-date">Jan 2025 – Jun 2025 (6 Months)</span>
-            </div>
-
-            <div class="timeline-location">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                <circle cx="12" cy="10" r="3"></circle>
-              </svg>
-              <span>Nagpur, Maharashtra, India</span>
-            </div>
-
-            <ul class="timeline-points">
-              <li>
-                <strong>Sensor Interfacing & Integration:</strong> Interfaced and rigorously bench-tested DHT11 temperature and humidity digital sensors with Arduino microcontrollers as part of a multi-node IoT automation system.
+<div class="about-pillars">
+<div class="pillar-card">
+<div class="pillar-icon">
+<svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20">
+<path d="M18 20V10M12 20V4M6 20v-6"></path>
+</svg>
+</div>
+<div class="pillar-title">Hardware Interfacing</div>
+<div class="pillar-desc">Sensor testing, relay modules, display drivers, and circuit debugging.</div>
+</div>
+<div class="pillar-card">
+<div class="pillar-icon">
+<svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20">
+<polyline points="16 18 22 12 16 6"></polyline>
+<polyline points="8 6 2 12 8 18"></polyline>
+</svg>
+</div>
+<div class="pillar-title">Microcontroller Firmware</div>
+<div class="pillar-desc">Programming in Embedded C, C, and C++ with register control and timers.</div>
+</div>
+<div class="pillar-card">
+<div class="pillar-icon">
+<svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20">
+<circle cx="12" cy="12" r="10"></circle>
+<line x1="2" x2="22" y1="12" y2="12"></line>
+<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+</svg>
+</div>
+<div class="pillar-title">Serial Protocols</div>
+<div class="pillar-desc">Hardware communication via UART, USART, SPI, and I2C buses.</div>
+</div>
+<div class="pillar-card">
+<div class="pillar-icon">
+<svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20">
+<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+</svg>
+</div>
+<div class="pillar-title">EDA &amp; Simulation Tools</div>
+<div class="pillar-desc">KiCad, EasyEDA, Proteus, Keil µVision5, MPLAB X IDE, Microchip Studio.</div>
+</div>
+</div>
+</div>
+<div class="about-stats">
+<div class="stat-card">
+<div class="stat-number">6</div>
+<div class="stat-label">Microcontroller Families (Arduino, ESP32, NodeMCU, ATmega32, PIC, 8051)</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">6 Mos</div>
+<div class="stat-label">Internship Experience (Cojag Technology Pvt. Ltd.)</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">9</div>
+<div class="stat-label">Comprehensive Modules (Advanced Embedded Systems - SOFCON)</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">4</div>
+<div class="stat-label">Communication Protocols (UART, USART, SPI, I2C)</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Internship & Work Experience -->
+<section id="experience" style="background: rgba(17, 24, 39, 0.3);">
+<div class="container">
+<div class="section-header">
+<h2 class="section-title">Internship Experience</h2>
+<p class="section-sub">Practical industry exposure in IoT automation, hardware testing, and Embedded C programming.</p>
+</div>
+<div class="timeline">
+<div class="timeline-item">
+<div class="timeline-badge">
+<svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18">
+<rect height="14" rx="2" ry="2" width="20" x="2" y="7"></rect>
+<path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+</svg>
+</div>
+<div class="timeline-card">
+<div class="timeline-header">
+<div>
+<h3 class="role-title">Intern – IoT</h3>
+<div class="company-name">Cojag Technology Pvt. Ltd.</div>
+</div>
+<span class="timeline-date">Jan 2025 – Jun 2025 (6 Months)</span>
+</div>
+<div class="timeline-location">
+<svg fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14">
+<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+<circle cx="12" cy="10" r="3"></circle>
+</svg>
+<span>Nagpur, Maharashtra, India</span>
+</div>
+<ul class="timeline-points">
+<li>
+<strong>Sensor Interfacing &amp; Integration:</strong> Interfaced and tested temperature/humidity and more sensors with Arduino as part of an IoT automation system; identified and resolved a hardware wiring fault during testing, restoring correct sensor communication.
               </li>
-              <li>
-                <strong>Hardware Fault Diagnosis:</strong> Identified and resolved a critical hardware wiring fault on prototype test rigs during physical testing, restoring accurate digital sensor bus communication and preventing signal dropouts.
+<li>
+<strong>Firmware Development &amp; Validation:</strong> Developed and validated Embedded C programs for microcontroller-based prototypes, gaining hands-on exposure to industry debugging and hardware integration practices.
               </li>
-              <li>
-                <strong>Firmware Development in Embedded C:</strong> Authored, validated, and optimized Embedded C firmware routines for microcontroller-based prototypes, gaining deep exposure to industry hardware debugging, signal validation, and integration practices.
-              </li>
-            </ul>
-
-            <div class="tech-pills">
-              <span class="tech-pill">Embedded C</span>
-              <span class="tech-pill">Arduino UNO</span>
-              <span class="tech-pill">DHT11 Sensor</span>
-              <span class="tech-pill">IoT Automation</span>
-              <span class="tech-pill">Hardware Debugging</span>
-              <span class="tech-pill">Circuit Interfacing</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Projects Section -->
-  <section id="projects">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">// Engineering Showcase</span>
-        <h2 class="section-title">Featured Projects</h2>
-        <p class="section-sub">Hardware prototypes built with microcontrollers, real-time sensing, and Embedded C logic.</p>
-      </div>
-
-      <div class="projects-grid">
-        <!-- Project 1: Smart Cooler -->
-        <div class="project-card">
-          <div class="project-banner">
-            <span class="project-type-tag">IoT & Climate Automation</span>
-            <div class="project-icon-large">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-              </svg>
-              <span>Smart Cooler System</span>
-            </div>
-          </div>
-
-          <div class="project-body">
-            <p class="project-desc">
-              An automated evaporative cooling system engineered to optimize energy consumption and protect pump motors. Automatically initiates cooling when environmental temperature exceeds critical thresholds while actively monitoring water levels.
+</ul>
+<div class="tech-pills">
+<span class="tech-pill">Embedded C</span>
+<span class="tech-pill">Arduino UNO</span>
+<span class="tech-pill">Sensor Interfacing</span>
+<span class="tech-pill">IoT Automation</span>
+<span class="tech-pill">Hardware Debugging</span>
+<span class="tech-pill">Circuit Testing</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Major Projects Section -->
+<section id="major-projects">
+<div class="container">
+<div class="section-header">
+<h2 class="section-title">Major Projects</h2>
+<p class="section-sub">Hardware prototypes built with microcontroller programming, sensor interfacing, and relay-based control.</p>
+</div>
+<div class="projects-grid">
+<!-- Project 1: Offline AI-Based Home Automation System -->
+<div class="project-card">
+<div class="project-banner" style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(56, 189, 248, 0.15));">
+<span class="project-type-tag">Voice AI &amp; Appliance Automation</span>
+<div class="project-icon-large">
+<svg fill="none" height="28" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="28">
+<path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+<path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+<line x1="12" x2="12" y1="19" y2="23"></line>
+<line x1="8" x2="16" y1="23" y2="23"></line>
+</svg>
+<span>Offline AI Home Automation</span>
+</div>
+</div>
+<div class="project-body">
+<p class="project-desc">
+              Built an offline voice-controlled home automation system using AI Thinker VC02 for local voice recognition and Arduino Nano for relay-based appliance control via UART communication. Achieved voice recognition accuracy for light, fan, socket, and oven control without internet dependency.
             </p>
-
-            <ul class="project-highlights">
-              <li><strong>Dynamic Climate Trigger:</strong> Evaluates DHT11 telemetry to trigger cooling cycles automatically when ambient temperature climbs above 30°C.</li>
-              <li><strong>Dry-Run Motor Protection:</strong> Integrated multi-level water sensor with LED status indicators and buzzer alarm alerts to prevent water pump burnout.</li>
-              <li><strong>Deterministic Firmware:</strong> Implemented robust Embedded C state-machine on Arduino UNO for responsive sensor sampling and actuator control.</li>
-            </ul>
-
-            <div class="project-status">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"></circle>
-                <polyline points="12 6 12 12 16 14"></polyline>
-              </svg>
-              <span>Status: Core automation functional; threshold calibration ongoing</span>
-            </div>
-
-            <div class="project-footer">
-              <div class="tech-pills">
-                <span class="tech-pill">Arduino UNO</span>
-                <span class="tech-pill">DHT11</span>
-                <span class="tech-pill">Embedded C</span>
-                <span class="tech-pill">Water Level Sensor</span>
-              </div>
-              <button class="btn btn-outline" style="padding: 0.4rem 0.85rem; font-size: 0.825rem;" onclick="openProjectModal('cooler')">
-                Architecture Info
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 2: Auto School Bell -->
-        <div class="project-card">
-          <div class="project-banner" style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(168, 85, 247, 0.15));">
-            <span class="project-type-tag">Real-Time Embedded Systems</span>
-            <div class="project-icon-large">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-              </svg>
-              <span>Auto School Bell System</span>
-            </div>
-          </div>
-
-          <div class="project-body">
-            <p class="project-desc">
-              A high-precision, relay-driven automated bell system for academic campuses. Synchronized with an RTC module with coin-cell battery backup to guarantee zero timetable disruption even through prolonged power outages.
+<ul class="project-highlights">
+<li><strong>Local Voice Recognition:</strong> Utilized AI Thinker VC02 voice module for offline speech command processing.</li>
+<li><strong>UART Interface:</strong> Transmitted parsed command frames serially from VC02 to Arduino Nano.</li>
+<li><strong>Appliance Relay Control:</strong> Isolated multi-channel relay module for switching light, fan, socket, and oven loads.</li>
+</ul>
+<div class="project-footer">
+<div class="tech-pills">
+<span class="tech-pill">Arduino Nano</span>
+<span class="tech-pill">AI Thinker VC02</span>
+<span class="tech-pill">Relay Module</span>
+<span class="tech-pill">UART</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Project 2: Smart Cooler -->
+<div class="project-card">
+<div class="project-banner">
+<span class="project-type-tag">Sensors &amp; Automation</span>
+<div class="project-icon-large">
+<svg fill="none" height="28" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="28">
+<path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+</svg>
+<span>Smart Cooler</span>
+</div>
+</div>
+<div class="project-body">
+<p class="project-desc">
+              Automated cooling system that activates above 30°C with water level monitoring via LED indicators and buzzer alerts to maintain optimal room cooling and protect water pump operation.
             </p>
-
-            <ul class="project-highlights">
-              <li><strong>Precision Timekeeping:</strong> Leveraged I2C DS3231 RTC module with temperature-compensated crystal oscillator for sub-second schedule accuracy.</li>
-              <li><strong>Power-Loss Resilience:</strong> Internal coin battery preserves exact timekeeping independently of main grid power supply.</li>
-              <li><strong>Relay Actuation & UI:</strong> High-voltage relay isolation triggers physical bells according to pre-programmed daily timetables, accompanied by LCD output.</li>
-            </ul>
-
-            <div class="project-status">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"></circle>
-                <polyline points="12 6 12 12 16 14"></polyline>
-              </svg>
-              <span>Status: Bell scheduling operational; LCD multi-schedule in progress</span>
-            </div>
-
-            <div class="project-footer">
-              <div class="tech-pills">
-                <span class="tech-pill">RTC DS3231</span>
-                <span class="tech-pill">I2C Bus</span>
-                <span class="tech-pill">Relay Module</span>
-                <span class="tech-pill">16x2 LCD</span>
-              </div>
-              <button class="btn btn-outline" style="padding: 0.4rem 0.85rem; font-size: 0.825rem;" onclick="openProjectModal('bell')">
-                Architecture Info
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Technical Skills Section -->
-  <section id="skills" style="background: rgba(17, 24, 39, 0.3);">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">// Core Competencies</span>
-        <h2 class="section-title">Technical Skills</h2>
-        <p class="section-sub">Comprehensive toolkit spanning low-level microcontroller architectures, hardware debugging, and EDA tools.</p>
-      </div>
-
-      <div class="skills-container">
-        <!-- Programming -->
-        <div class="skill-category-card">
-          <div class="skill-cat-header">
-            <div class="skill-cat-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="16 18 22 12 16 6"></polyline>
-                <polyline points="8 6 2 12 8 18"></polyline>
-              </svg>
-            </div>
-            <h3 class="skill-cat-title">Programming</h3>
-          </div>
-          <div class="skill-tags">
-            <span class="skill-tag featured">Embedded C</span>
-            <span class="skill-tag featured">C Programming</span>
-            <span class="skill-tag">Python (Basic)</span>
-            <span class="skill-tag">Bare-Metal Logic</span>
-            <span class="skill-tag">Register Manipulation</span>
-          </div>
-        </div>
-
-        <!-- Microcontrollers -->
-        <div class="skill-category-card">
-          <div class="skill-cat-header">
-            <div class="skill-cat-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
-                <rect x="9" y="9" width="6" height="6"></rect>
-              </svg>
-            </div>
-            <h3 class="skill-cat-title">Microcontrollers</h3>
-          </div>
-          <div class="skill-tags">
-            <span class="skill-tag featured">Arduino UNO</span>
-            <span class="skill-tag featured">ESP32</span>
-            <span class="skill-tag">NodeMCU / ESP8266</span>
-            <span class="skill-tag featured">AVR (ATmega32)</span>
-            <span class="skill-tag">PIC (PIC16F877A)</span>
-            <span class="skill-tag">8051 Architecture</span>
-          </div>
-        </div>
-
-        <!-- Communication Protocols -->
-        <div class="skill-category-card">
-          <div class="skill-cat-header">
-            <div class="skill-cat-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-              </svg>
-            </div>
-            <h3 class="skill-cat-title">Protocols</h3>
-          </div>
-          <div class="skill-tags">
-            <span class="skill-tag featured">UART</span>
-            <span class="skill-tag featured">SPI</span>
-            <span class="skill-tag featured">I2C</span>
-            <span class="skill-tag">Serial Telemetry</span>
-            <span class="skill-tag">Digital Sensor Buses</span>
-          </div>
-        </div>
-
-        <!-- Hardware & Circuit Design -->
-        <div class="skill-category-card">
-          <div class="skill-cat-header">
-            <div class="skill-cat-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-                <polyline points="2 17 12 22 22 17"></polyline>
-                <polyline points="2 12 12 17 22 12"></polyline>
-              </svg>
-            </div>
-            <h3 class="skill-cat-title">Hardware Engineering</h3>
-          </div>
-          <div class="skill-tags">
-            <span class="skill-tag featured">Sensor Interfacing</span>
-            <span class="skill-tag featured">Circuit Design</span>
-            <span class="skill-tag featured">Hardware Debugging</span>
-            <span class="skill-tag">Wiring Fault Diagnosis</span>
-            <span class="skill-tag">PCB Design Basics</span>
-            <span class="skill-tag">Bench Testing</span>
-          </div>
-        </div>
-
-        <!-- EDA & CAD Tools -->
-        <div class="skill-category-card">
-          <div class="skill-cat-header">
-            <div class="skill-cat-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
-              </svg>
-            </div>
-            <h3 class="skill-cat-title">EDA & Simulation</h3>
-          </div>
-          <div class="skill-tags">
-            <span class="skill-tag featured">KiCad</span>
-            <span class="skill-tag featured">Proteus Design Suite</span>
-            <span class="skill-tag">EasyEDA</span>
-            <span class="skill-tag">Schematic Capture</span>
-            <span class="skill-tag">Circuit Simulation</span>
-          </div>
-        </div>
-
-        <!-- IDEs & Compilers -->
-        <div class="skill-category-card">
-          <div class="skill-cat-header">
-            <div class="skill-cat-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                <line x1="8" y1="21" x2="16" y2="21"></line>
-                <line x1="12" y1="17" x2="12" y2="21"></line>
-              </svg>
-            </div>
-            <h3 class="skill-cat-title">IDEs & Compilers</h3>
-          </div>
-          <div class="skill-tags">
-            <span class="skill-tag featured">Keil µVision5</span>
-            <span class="skill-tag featured">MPLAB X IDE</span>
-            <span class="skill-tag">Microchip Studio</span>
-            <span class="skill-tag">Arduino IDE</span>
-            <span class="skill-tag">VS Code</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Education & Certifications -->
-  <section id="education">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">// Qualifications</span>
-        <h2 class="section-title">Education & Certifications</h2>
-        <p class="section-sub">Academic foundation backed by rigorous industry training and accredited credentials.</p>
-      </div>
-
-      <div class="edu-cert-grid">
-        <!-- Education Column -->
-        <div class="card">
-          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem;">
-            <div style="width: 38px; height: 38px; border-radius: 8px; background: rgba(20, 184, 166, 0.15); color: var(--accent-light); display: flex; align-items: center; justify-content: center;">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
-                <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
-              </svg>
-            </div>
-            <h3 style="font-size: 1.35rem; font-weight: 700;">Formal Education</h3>
-          </div>
-
-          <!-- B.Tech -->
-          <div class="edu-item">
-            <div class="edu-degree">Bachelor of Technology (B.Tech)</div>
-            <div style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 0.25rem;">
-              Electronics & Communication Engineering
-            </div>
-            <div class="edu-inst">Agnihotri College of Engineering, Wardha (RTMNU)</div>
-            <div class="edu-meta">
-              <span>Duration: 2022 – 2026</span>
-              <span style="color: var(--accent-light); font-weight: 600;">Passing Year: 2026</span>
-            </div>
-          </div>
-
-          <!-- HSC -->
-          <div class="edu-item">
-            <div class="edu-degree">Higher Secondary Certificate (HSC)</div>
-            <div class="edu-inst">Madhomati Junior College, Lakh</div>
-            <div style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.35rem;">
-              Maharashtra State Board of Secondary and Higher Secondary Education
-            </div>
-            <div class="edu-meta">
-              <span>Passing Year: 2022</span>
-              <span style="color: var(--accent-blue); font-weight: 600;">Percentage: 72.83%</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Certification Column -->
-        <div class="cert-card">
-          <span class="cert-badge-tag">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="8" r="7"></circle>
-              <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
-            </svg>
-            NSDC & Skill India Certified
+<ul class="project-highlights">
+<li><strong>Temperature Trigger:</strong> Interfaced DHT11 sensor to monitor environmental temperature and trigger cooling above 30°C.</li>
+<li><strong>Water Level Sensing:</strong> Monitored water reserve levels with LED indicators and piezo buzzer alerts.</li>
+<li><strong>Firmware in Embedded C:</strong> Structured control logic on Arduino UNO for responsive sensor sampling and actuator control.</li>
+</ul>
+<div class="project-footer">
+<div class="tech-pills">
+<span class="tech-pill">Arduino UNO</span>
+<span class="tech-pill">DHT11</span>
+<span class="tech-pill">Embedded C</span>
+<span class="tech-pill">Buzzer Alert</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="minor-projects" style="background: rgba(17, 24, 39, 0.25);"><div class="container"><div class="section-header"><h2 class="section-title">Minor Projects</h2><p class="section-sub">Hands-on microcontroller prototypes and peripheral interfacing projects categorized by technology.</p></div><div class="minor-projects-grid"><div class="minor-card"><div class="minor-card-header"><div class="minor-icon"><svg fill="none" height="22" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="22"><rect height="16" rx="2" width="16" x="4" y="4"></rect><rect height="6" width="6" x="9" y="9"></rect><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"></path></svg></div><span class="minor-tag tag-8051">8051 Microcontroller (AT89C51)</span></div><h3 class="minor-title">DC Motor Control with L293D &amp; 16x2 LCD</h3><p class="minor-desc">Implemented bidirectional DC motor control (forward and reverse) using AT89C51 with L293D driver IC and real-time status output on a 16x2 LCD display. Developed and simulated in Proteus.</p><div class="tech-pills"><span class="tech-pill">AT89C51</span><span class="tech-pill">L293D</span><span class="tech-pill">16x2 LCD</span><span class="tech-pill">Proteus</span><span class="tech-pill">Motor Control</span></div></div><div class="minor-card"><div class="minor-card-header"><div class="minor-icon"><svg fill="none" height="22" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="22"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg></div><span class="minor-tag tag-8051">8051 Microcontroller (AT89C51)</span></div><h3 class="minor-title">UART Serial Communication &amp; Terminal Control</h3><p class="minor-desc">Built serial communication between a Virtual Terminal and AT89C51 in Proteus. Sent commands to control LEDs with live status feedback rendered on an LCD display.</p><div class="tech-pills"><span class="tech-pill">AT89C51</span><span class="tech-pill">UART</span><span class="tech-pill">Virtual Terminal</span><span class="tech-pill">LCD</span><span class="tech-pill">Serial I/O</span></div></div><div class="minor-card"><div class="minor-card-header"><div class="minor-icon"><svg fill="none" height="22" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="22"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" x2="12.01" y1="20" y2="20"></line></svg></div><span class="minor-tag tag-esp">ESP32 &amp; IoT Web Control</span></div><h3 class="minor-title">ESP32 Real-Time Environment Monitor</h3><p class="minor-desc">Developed a real-time ambient temperature and humidity monitoring system with ESP32 and DHT11 sensor, hosting a responsive web dashboard over Wi-Fi for live telemetry.</p><div class="tech-pills"><span class="tech-pill">ESP32</span><span class="tech-pill">DHT11</span><span class="tech-pill">Wi-Fi</span><span class="tech-pill">Web Dashboard</span><span class="tech-pill">IoT</span></div></div><div class="minor-card"><div class="minor-card-header"><div class="minor-icon"><svg fill="none" height="22" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="22"><circle cx="12" cy="12" r="10"></circle><line x1="2" x2="22" y1="12" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></div><span class="minor-tag tag-esp">ESP32 &amp; IoT Web Control</span></div><h3 class="minor-title">ESP32 Web Server Appliance / LED Controller</h3><p class="minor-desc">Created an ESP32-based asynchronous web server allowing users to toggle and control individual output devices directly through a browser-based user interface over Wi-Fi.</p><div class="tech-pills"><span class="tech-pill">ESP32</span><span class="tech-pill">Web Server</span><span class="tech-pill">Wi-Fi</span><span class="tech-pill">GPIO</span><span class="tech-pill">Embedded C</span></div></div><div class="minor-card"><div class="minor-card-header"><div class="minor-icon"><svg fill="none" height="22" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="22"><rect height="18" rx="2" width="18" x="3" y="3"></rect><circle cx="8" cy="8" r="1"></circle><circle cx="12" cy="8" r="1"></circle><circle cx="16" cy="8" r="1"></circle><circle cx="8" cy="12" r="1"></circle><circle cx="12" cy="12" r="1"></circle><circle cx="16" cy="12" r="1"></circle><circle cx="8" cy="16" r="1"></circle><circle cx="12" cy="16" r="1"></circle><circle cx="16" cy="16" r="1"></circle></svg></div><span class="minor-tag tag-arduino">Arduino Interfacing</span></div><h3 class="minor-title">Password-Based Access Control System</h3><p class="minor-desc">Implemented security access verification using Arduino UNO and a 4x4 matrix keypad, featuring password validation logic, access granted/denied states, and alert responses.</p><div class="tech-pills"><span class="tech-pill">Arduino UNO</span><span class="tech-pill">4x4 Keypad</span><span class="tech-pill">Access Control</span><span class="tech-pill">Security Logic</span></div></div><div class="minor-card"><div class="minor-card-header"><div class="minor-icon"><svg fill="none" height="22" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="22"><rect height="7" width="7" x="3" y="3"></rect><rect height="7" width="7" x="14" y="3"></rect><rect height="7" width="7" x="14" y="14"></rect><rect height="7" width="7" x="3" y="14"></rect></svg></div><span class="minor-tag tag-arduino">Arduino Interfacing</span></div><h3 class="minor-title">Scrolling Text Display on MAX7219 Dot Matrix</h3><p class="minor-desc">Built dynamic message scrolling using Arduino UNO and a MAX7219 8x8 LED dot matrix module over SPI serial communication protocol.</p><div class="tech-pills"><span class="tech-pill">Arduino UNO</span><span class="tech-pill">MAX7219</span><span class="tech-pill">8x8 Matrix</span><span class="tech-pill">SPI Protocol</span></div></div><div class="minor-card"><div class="minor-card-header"><div class="minor-icon"><svg fill="none" height="22" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="22"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div><span class="minor-tag tag-pic">PIC Microcontroller (PIC16F877A)</span></div><h3 class="minor-title">Precise 1ms Delay Generation with Timer0</h3><p class="minor-desc">Calculated and configured Timer0 registers on PIC16F877A in MPLAB X IDE for exact 1ms timing delay generation and timer overflow handling, verified in Proteus simulation.</p><div class="tech-pills"><span class="tech-pill">PIC16F877A</span><span class="tech-pill">Timer0</span><span class="tech-pill">MPLAB X IDE</span><span class="tech-pill">Proteus</span><span class="tech-pill">Embedded C</span></div></div></div></div></section>
+<!-- Technical Skills Section -->
+<section id="skills" style="background: rgba(17, 24, 39, 0.3);">
+<div class="container">
+<div class="section-header">
+<h2 class="section-title">Technical Skills</h2>
+<p class="section-sub">Technical skill set directly grounded in resume proficiencies and embedded coursework.</p>
+</div>
+<div class="skills-container">
+<!-- Programming -->
+<div class="skill-category-card">
+<div class="skill-cat-header">
+<div class="skill-cat-icon">
+<svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20">
+<polyline points="16 18 22 12 16 6"></polyline>
+<polyline points="8 6 2 12 8 18"></polyline>
+</svg>
+</div>
+<h3 class="skill-cat-title">Programming</h3>
+</div>
+<div class="skill-tags">
+<span class="skill-tag featured">Embedded C</span>
+<span class="skill-tag featured">C</span>
+<span class="skill-tag featured">C++</span>
+<span class="skill-tag">Python Basics</span>
+<span class="skill-tag">Datasheet Reading</span>
+</div>
+</div>
+<!-- Microcontrollers -->
+<div class="skill-category-card">
+<div class="skill-cat-header">
+<div class="skill-cat-icon">
+<svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20">
+<rect height="16" rx="2" width="16" x="4" y="4"></rect>
+<rect height="6" width="6" x="9" y="9"></rect>
+</svg>
+</div>
+<h3 class="skill-cat-title">Microcontrollers</h3>
+</div>
+<div class="skill-tags">
+<span class="skill-tag featured">Arduino UNO</span>
+<span class="skill-tag featured">ESP32</span>
+<span class="skill-tag featured">NodeMCU</span>
+<span class="skill-tag featured">ATmega32 (AVR)</span>
+<span class="skill-tag featured">PIC (PIC16F877A)</span>
+<span class="skill-tag featured">8051 (AT89C51)</span>
+</div>
+</div>
+<!-- Communication Protocols -->
+<div class="skill-category-card">
+<div class="skill-cat-header">
+<div class="skill-cat-icon">
+<svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20">
+<path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+</svg>
+</div>
+<h3 class="skill-cat-title">Communication Protocols</h3>
+</div>
+<div class="skill-tags">
+<span class="skill-tag featured">UART</span>
+<span class="skill-tag featured">USART</span>
+<span class="skill-tag featured">SPI</span>
+<span class="skill-tag featured">I2C</span>
+</div>
+</div>
+<!-- Hardware & Circuit Design -->
+<div class="skill-category-card">
+<div class="skill-cat-header">
+<div class="skill-cat-icon">
+<svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20">
+<polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+<polyline points="2 17 12 22 22 17"></polyline>
+<polyline points="2 12 12 17 22 12"></polyline>
+</svg>
+</div>
+<h3 class="skill-cat-title">Hardware</h3>
+</div>
+<div class="skill-tags">
+<span class="skill-tag featured">Sensor Interfacing</span>
+<span class="skill-tag featured">Circuit Design</span>
+<span class="skill-tag featured">Hardware Debugging</span>
+<span class="skill-tag">Wiring Fault Resolution</span>
+<span class="skill-tag">PCB Design</span>
+</div>
+</div>
+<!-- EDA & Simulation Tools -->
+<div class="skill-category-card">
+<div class="skill-cat-header">
+<div class="skill-cat-icon">
+<svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20">
+<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+</svg>
+</div>
+<h3 class="skill-cat-title">Tools &amp; EDA</h3>
+</div>
+<div class="skill-tags">
+<span class="skill-tag featured">KiCad</span>
+<span class="skill-tag featured">EasyEDA</span>
+<span class="skill-tag featured">Proteus</span>
+<span class="skill-tag">Schematic Design</span>
+</div>
+</div>
+<!-- IDEs & Compilers -->
+<div class="skill-category-card">
+<div class="skill-cat-header">
+<div class="skill-cat-icon">
+<svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20">
+<rect height="14" rx="2" width="20" x="2" y="3"></rect>
+<line x1="8" x2="16" y1="21" y2="21"></line>
+<line x1="12" x2="12" y1="17" y2="21"></line>
+</svg>
+</div>
+<h3 class="skill-cat-title">Development IDEs</h3>
+</div>
+<div class="skill-tags">
+<span class="skill-tag featured">Keil µVision5</span>
+<span class="skill-tag featured">MPLAB X IDE</span>
+<span class="skill-tag featured">Microchip Studio</span>
+<span class="skill-tag">Arduino IDE</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Education & Certifications -->
+<section id="education">
+<div class="container">
+<div class="section-header">
+<h2 class="section-title">Education &amp; Certifications</h2>
+<p class="section-sub">Formal education and industry-certified embedded systems training.</p>
+</div>
+<div class="edu-cert-grid">
+<!-- Education Column -->
+<div class="card">
+<div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem;">
+<div style="width: 38px; height: 38px; border-radius: 8px; background: rgba(20, 184, 166, 0.15); color: var(--accent-light); display: flex; align-items: center; justify-content: center;">
+<svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20">
+<path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+<path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+</svg>
+</div>
+<h3 style="font-size: 1.35rem; font-weight: 700;">Education</h3>
+</div>
+<!-- B.Tech -->
+<div class="edu-item">
+<div class="edu-degree">Bachelor of Technology – Electronics &amp; Communication Engineering</div>
+<div class="edu-inst">Agnihotri College of Engineering, Wardha (RTMNU)</div>
+<div class="edu-meta">
+<span>Duration: 2022 – 2026</span>
+<span style="color: var(--accent-light); font-weight: 600;">Year of Passing: 2026</span>
+</div>
+</div>
+<!-- HSC -->
+<div class="edu-item">
+<div class="edu-degree">Higher Secondary Certificate (HSC)</div>
+<div class="edu-inst">Madhomati Junior College, Lakh – Maharashtra State Board</div>
+<div class="edu-meta">
+<span>Year of Passing: 2022</span>
+<span style="color: var(--accent-blue); font-weight: 600;">Percentage: 72.83%</span>
+</div>
+</div>
+</div>
+<!-- Certification Column -->
+<div class="cert-card">
+<span class="cert-badge-tag">
+<svg fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14">
+<circle cx="12" cy="8" r="7"></circle>
+<polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+</svg>
+            NSDC &amp; Skill India Certified
           </span>
-
-          <h3 class="cert-title">Advanced Embedded Systems & Robotics</h3>
-          <div class="cert-issuer">SOFCON India Pvt. Ltd., Pune</div>
-
-          <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1rem;">
-            Intensive hands-on professional certification curriculum covering microcontroller hardware architectures, bare-metal C programming, peripheral interfacing, and IoT board integration.
+<h3 class="cert-title">Advanced Embedded Systems</h3>
+<div class="cert-issuer">SOFCON India Pvt. Ltd., Pune</div>
+<p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.25rem;">
+            Professional training program covering electronics fundamentals, programming languages, microcontroller architectures, communication protocols, PCB design, and IoT interfacing.
           </p>
-
-          <div style="background: rgba(20, 184, 166, 0.08); border-left: 3px solid var(--accent); padding: 0.75rem 1rem; border-radius: 4px; font-size: 0.875rem; color: var(--text-primary); margin-bottom: 1.25rem;">
-            <strong>Module Completion:</strong> Successfully completed <strong>8 of 9 modules</strong> with strong practical laboratory assessment.
-          </div>
-
-          <div class="modules-list">
-            <div class="modules-title">Curriculum Modules Completed:</div>
-            <div class="modules-tags">
-              <span class="module-pill">Basic Electronics</span>
-              <span class="module-pill">Embedded C / C Programming</span>
-              <span class="module-pill">Arduino Architecture</span>
-              <span class="module-pill">8051 Microcontroller</span>
-              <span class="module-pill">AVR (ATmega32)</span>
-              <span class="module-pill">PIC (PIC16F877A)</span>
-              <span class="module-pill">IoT (NodeMCU / ESP8266)</span>
-              <span class="module-pill">PCB Design</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact & Get In Touch -->
-  <section id="contact" style="background: rgba(10, 14, 23, 0.5);">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">// Let's Connect</span>
-        <h2 class="section-title">Get In Touch</h2>
-        <p class="section-sub">Interested in discussing an embedded engineering opportunity or collaborating on a project? Feel free to reach out!</p>
-      </div>
-
-      <div class="contact-card">
-        <div class="contact-grid">
-          <div>
-            <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 0.75rem;">Contact Information</h3>
-            <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">
-              Open to fresher opportunities, internships, and technical collaborations in Pune, Maharashtra or remote/hybrid embedded teams.
-            </p>
-
-            <ul class="contact-info-list">
-              <li class="contact-info-item">
-                <div class="contact-icon-box">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                    <polyline points="22,6 12,13 2,6"></polyline>
-                  </svg>
-                </div>
-                <div>
-                  <div class="contact-label">Email Address</div>
-                  <a href="mailto:ganpatsawale13@gmail.com" class="contact-val">ganpatsawale13@gmail.com</a>
-                </div>
-              </li>
-
-              <li class="contact-info-item">
-                <div class="contact-icon-box">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                  </svg>
-                </div>
-                <div>
-                  <div class="contact-label">Phone Number</div>
-                  <a href="tel:9322707012" class="contact-val">+91 9322707012</a>
-                </div>
-              </li>
-
-              <li class="contact-info-item">
-                <div class="contact-icon-box">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                    <rect x="2" y="9" width="4" height="12"></rect>
-                    <circle cx="4" cy="4" r="2"></circle>
-                  </svg>
-                </div>
-                <div>
-                  <div class="contact-label">LinkedIn Profile</div>
-                  <a href="https://linkedin.com/in/ganpat-sawale13" target="_blank" rel="noopener" class="contact-val">
-                    linkedin.com/in/ganpat-sawale13
-                  </a>
-                </div>
-              </li>
-
-              <li class="contact-info-item">
-                <div class="contact-icon-box">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                    <circle cx="12" cy="10" r="3"></circle>
-                  </svg>
-                </div>
-                <div>
-                  <div class="contact-label">Location</div>
-                  <div class="contact-val">Pune, Maharashtra, India</div>
-                </div>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Contact Form -->
-          <div>
-            <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 0.75rem;">Send a Message</h3>
-            <form class="contact-form" id="contactForm" onsubmit="handleFormSubmit(event)">
-              <div class="form-group">
-                <label for="name">Your Name</label>
-                <input type="text" id="name" class="form-control" placeholder="e.g. Rahul Sharma" required>
-              </div>
-
-              <div class="form-group">
-                <label for="email">Your Email Address</label>
-                <input type="email" id="email" class="form-control" placeholder="name@company.com" required>
-              </div>
-
-              <div class="form-group">
-                <label for="subject">Subject</label>
-                <input type="text" id="subject" class="form-control" placeholder="Embedded Engineer Opportunity / Project Inquiry" required>
-              </div>
-
-              <div class="form-group">
-                <label for="message">Message</label>
-                <textarea id="message" class="form-control" placeholder="Describe the role or project requirements..." required></textarea>
-              </div>
-
-              <button type="submit" class="btn btn-primary" style="width: 100%;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <line x1="22" y1="2" x2="11" y2="13"></line>
-                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                </svg>
-                <span>Transmit Message</span>
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <p style="margin-bottom: 0.5rem; font-weight: 500; color: var(--text-secondary);">
-        Ganpat S. Sawale — Embedded Systems & IoT Engineer
+<div class="modules-list">
+<div class="modules-title">Course Modules (From SOFCON Curriculum):</div>
+<div class="modules-tags">
+<span class="module-pill">Module 1: Basic Electronics</span>
+<span class="module-pill">Module 2: Programming Languages (C, Python, Embedded C)</span>
+<span class="module-pill">Module 3: Arduino Programming</span>
+<span class="module-pill">Module 4: 8051 Microcontrollers (AT89C51)</span>
+<span class="module-pill">Module 5: AVR Microcontrollers (ATmega32)</span>
+<span class="module-pill">Module 6: PIC Microcontrollers (PIC16F877A)</span>
+<span class="module-pill">Module 7: Raspberry Pi</span>
+<span class="module-pill">Module 8: PCB Design</span>
+<span class="module-pill">Module 9: IoT (NodeMCU / ESP32)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact & Get In Touch -->
+<section id="contact" style="background: rgba(10, 14, 23, 0.5);">
+<div class="container">
+<div class="section-header">
+<h2 class="section-title">Get In Touch</h2>
+<p class="section-sub">Interested in discussing an embedded systems opportunity or technical collaboration? Reach out directly through any channel below.</p>
+</div>
+<div class="contact-card">
+<div class="contact-card-header">
+<h3 class="contact-card-title">Direct Contact Channels</h3>
+<p class="contact-card-desc">
+            Seeking a fresher Embedded Systems Engineer role where I can apply practical industry exposure to build reliable, efficient embedded solutions.
+          </p>
+</div>
+<div class="contact-channels-grid">
+<!-- Email Card -->
+<div class="channel-card">
+<div class="channel-icon-box">
+<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24">
+<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+<polyline points="22,6 12,13 2,6"></polyline>
+</svg>
+</div>
+<div class="channel-label">Email Address</div>
+<a class="channel-val" href="mailto:ganpatsawale13@gmail.com" title="ganpatsawale13@gmail.com">ganpatsawale13@gmail.com</a>
+<a class="btn btn-primary channel-action" href="mailto:ganpatsawale13@gmail.com">
+<span>Send Email</span>
+<svg fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14">
+<line x1="5" x2="19" y1="12" y2="12"></line>
+<polyline points="12 5 19 12 12 19"></polyline>
+</svg>
+</a>
+</div>
+<!-- Phone Card -->
+<div class="channel-card">
+<div class="channel-icon-box">
+<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+</svg>
+</div>
+<div class="channel-label">Phone Number</div>
+<a class="channel-val" href="tel:9322707012">+91 9322707012</a>
+<a class="btn btn-outline channel-action" href="tel:9322707012">
+<span>Call Direct</span>
+<svg fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14">
+<line x1="5" x2="19" y1="12" y2="12"></line>
+<polyline points="12 5 19 12 12 19"></polyline>
+</svg>
+</a>
+</div>
+<!-- LinkedIn Card -->
+<div class="channel-card">
+<div class="channel-icon-box">
+<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24">
+<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+<rect height="12" width="4" x="2" y="9"></rect>
+<circle cx="4" cy="4" r="2"></circle>
+</svg>
+</div>
+<div class="channel-label">LinkedIn Profile</div>
+<a class="channel-val" href="https://www.linkedin.com/in/ganpat-sawale13" rel="noopener" target="_blank">ganpat-sawale13</a>
+<a class="btn btn-outline channel-action" href="https://www.linkedin.com/in/ganpat-sawale13" rel="noopener" target="_blank">
+<span>Connect</span>
+<svg fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14">
+<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+<polyline points="15 3 21 3 21 9"></polyline>
+<line x1="10" x2="21" y1="14" y2="3"></line>
+</svg>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer>
+<div class="container">
+<p style="margin-bottom: 0.5rem; font-weight: 500; color: var(--text-secondary);">
+        Ganpat S. Sawale — Embedded Systems &amp; IoT Engineer
       </p>
-      <p style="font-size: 0.8rem;">
-        Designed & Built for High Performance Hardware Interfacing • Pune, Maharashtra
+<p style="font-size: 0.8rem;">
+        Pune, Maharashtra • ganpatsawale13@gmail.com • +91 9322707012
       </p>
-    </div>
-  </footer>
-
-  <!-- Project Architecture Modal -->
-  <div class="modal-overlay" id="projectModal">
-    <div class="modal-card">
-      <button class="modal-close" onclick="closeProjectModal()">&times;</button>
-      <div id="modalContent"></div>
-    </div>
-  </div>
-
-  <!-- Toast Notification -->
-  <div class="toast" id="toastNotification">
-    <div class="toast-icon">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-        <polyline points="22 4 12 14.01 9 11.01"></polyline>
-      </svg>
-    </div>
-    <div id="toastMessage">Message sent successfully!</div>
-  </div>
-
-  <script>
-// Theme Toggle Logic
-    const themeToggleBtn = document.getElementById('themeToggle');
-    const moonIcon = document.getElementById('moonIcon');
-    const sunIcon = document.getElementById('sunIcon');
-    
-    // Check saved or system preference
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const currentTheme = (function(){ try { return localStorage.getItem('portfolio-theme'); } catch(e) { return null; } })() || 'dark';
-    
-    function applyTheme(theme) {
-      if (theme === 'light') {
-        document.documentElement.setAttribute('data-theme', 'light');
-        moonIcon.style.display = 'none';
-        sunIcon.style.display = 'block';
-      } else {
-        document.documentElement.removeAttribute('data-theme');
-        moonIcon.style.display = 'block';
-        sunIcon.style.display = 'none';
-      }
-      try { localStorage.setItem('portfolio-theme', theme); } catch(e) {}
-    }
-    
-    applyTheme(currentTheme);
-
-    themeToggleBtn.addEventListener('click', () => {
-      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-      applyTheme(isLight ? 'dark' : 'light');
-    });
-
-    // Mobile Menu Toggle
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const navLinks = document.getElementById('navLinks');
-    
-    mobileMenuBtn.addEventListener('click', () => {
-      navLinks.classList.toggle('mobile-open');
-    });
-
-    // Close mobile menu on nav link click
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('mobile-open');
-      });
-    });
-
-    // Active Navigation Highlighting on Scroll
-    const sections = document.querySelectorAll('section');
-    const navItems = document.querySelectorAll('.nav-links a');
-
-    window.addEventListener('scroll', () => {
-      let currentSectionId = '';
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop - 120;
-        if (window.scrollY >= sectionTop) {
-          currentSectionId = section.getAttribute('id');
-        }
-      });
-
-      navItems.forEach(item => {
-        item.classList.remove('active');
-        if (item.getAttribute('href') === `#${currentSectionId}`) {
-          item.classList.add('active');
-        }
-      });
-    });
-
-    // Project Details Modal Data
-    const projectDetails = {
-      cooler: {
-        title: "Smart Cooler — Embedded System Details",
-        category: "Arduino UNO • DHT11 • Embedded C • Actuators",
-        overview: "An automated cooling system designed to optimize evaporative cooling efficiency while protecting water pump mechanics from dry-run damage.",
-        specs: [
-          "Microcontroller: ATmega328P (Arduino UNO platform)",
-          "Sensors: DHT11 Digital Temperature & Humidity Sensor, Conductive/Float Water Level Probe",
-          "Actuators & Outputs: 5V Submersible Pump Relay, DC Cooling Fan, Status LED Array, Piezo Buzzer",
-          "Operational Logic: Evaluates ambient temperature every 2000ms. When T > 30°C and water level is SAFE, triggers fan and pump relay. If water level drops below MIN, sounds buzzer alarm and cuts pump power."
-        ],
-        codeSnippet: `// Smart Cooler Control Loop Snippet
-void evaluate_cooling_state(float temp, uint8_t water_level) {
-    if (water_level == LEVEL_CRITICAL) {
-        digitalWrite(PUMP_RELAY_PIN, RELAY_OFF);
-        trigger_buzzer_alert(FREQ_ALERT_HZ);
-        set_led_indicator(LED_RED_ALERT);
-    } else if (temp >= 30.0f) {
-        digitalWrite(PUMP_RELAY_PIN, RELAY_ON);
-        digitalWrite(FAN_RELAY_PIN, RELAY_ON);
-        set_led_indicator(LED_GREEN_COOLING);
-    } else {
-        digitalWrite(PUMP_RELAY_PIN, RELAY_OFF);
-        set_led_indicator(LED_YELLOW_STANDBY);
-    }
-}`
-      },
-      bell: {
-        title: "Auto School Bell — Embedded System Details",
-        category: "Arduino UNO • RTC DS3231 • Relay • 16x2 LCD",
-        overview: "An automated campus bell system engineered to eliminate manual timing inaccuracies and ensure uncompromised scheduling reliability even during mains power outages.",
-        specs: [
-          "Microcontroller: Arduino UNO (ATmega328P)",
-          "Real-Time Clock: DS3231 High-Precision RTC module communicating via I2C with integrated TCXO",
-          "Output Stages: Opto-isolated 10A/250VAC Relay module driving high-decibel campus bell",
-          "User Interface: 16x2 Character LCD over 4-bit parallel / I2C bus showing live date, time, and next bell countdown",
-          "Power Backup: CR2032 Lithium battery directly attached to DS3231 RTC preserving clock registers through blackout events"
-        ],
-        codeSnippet: `// RTC Schedule Checking Loop Snippet
-void check_bell_schedule(DateTime now) {
-    for (uint8_t i = 0; i < TOTAL_SCHEDULED_BELLS; i++) {
-        if (now.hour() == schedule[i].hour && 
-            now.minute() == schedule[i].minute && 
-            now.second() == 0) {
-            trigger_bell_pulse(schedule[i].duration_seconds);
-            log_bell_event(now, schedule[i].period_name);
-            break;
-        }
-    }
-}`
-      }
-    };
-
-    function openProjectModal(key) {
-      const data = projectDetails[key];
-      if (!data) return;
-
-      const content = `
-        <span class="cert-badge-tag">${data.category}</span>
-        <h2 style="font-size: 1.5rem; font-weight: 700; margin: 0.5rem 0 1rem; color: var(--text-primary);">${data.title}</h2>
-        <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.25rem;">${data.overview}</p>
-        
-        <h4 style="font-size: 1rem; font-weight: 700; color: var(--accent-light); margin-bottom: 0.5rem;">Hardware & Firmware Specifications:</h4>
-        <ul style="list-style: none; margin-bottom: 1.5rem;">
-          ${data.specs.map(s => `<li style="position: relative; padding-left: 1.25rem; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-secondary);"><span style="position: absolute; left: 0; color: var(--accent);">▸</span>${s}</li>`).join('')}
-        </ul>
-
-        <h4 style="font-size: 1rem; font-weight: 700; color: var(--accent-light); margin-bottom: 0.5rem;">Firmware Logic Snapshot:</h4>
-        <pre style="background: var(--code-bg); padding: 1rem; border-radius: 8px; border: 1px solid var(--border-color); font-family: var(--font-mono); font-size: 0.8rem; overflow-x: auto; color: var(--accent-light); line-height: 1.5;"><code>${escapeHtml(data.codeSnippet)}</code></pre>
-      `;
-
-      document.getElementById('modalContent').innerHTML = content;
-      document.getElementById('projectModal').classList.add('active');
-    }
-
-    function closeProjectModal() {
-      document.getElementById('projectModal').classList.remove('active');
-    }
-
-    // Close modal on click outside
-    document.getElementById('projectModal').addEventListener('click', (e) => {
-      if (e.target.id === 'projectModal') {
-        closeProjectModal();
-      }
-    });
-
-    // Escape key closes modal
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeProjectModal();
-    });
-
-    function escapeHtml(string) {
-      return String(string).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-    }
-
-    // Contact Form Handler & Toast
-    function handleFormSubmit(e) {
-      e.preventDefault();
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const subject = document.getElementById('subject').value;
-      const message = document.getElementById('message').value;
-
-      // Construct mailto link fallback
-      const mailtoUrl = `mailto:ganpatsawale13@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent("From: " + name + " (" + email + ")\n\n" + message)}`;
-      
-      showToast(`Thank you, ${name}! Opening mail client to dispatch your message...`);
-      
-      setTimeout(() => {
-        window.location.href = mailtoUrl;
-      }, 800);
-
-      document.getElementById('contactForm').reset();
-    }
-
-    function showToast(msg) {
-      const toast = document.getElementById('toastNotification');
-      document.getElementById('toastMessage').textContent = msg;
-      toast.classList.add('show');
-      setTimeout(() => {
-        toast.classList.remove('show');
-      }, 4000);
-    }
-</script>
+</div>
+</footer>
+<script src="script.js"></script>
 </body>
 </html>
